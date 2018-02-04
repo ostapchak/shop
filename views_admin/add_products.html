@@ -1,0 +1,49 @@
+<div ng-controller="categoryCtrl">
+	<form name="myForm" novalidate >
+		<div class="form-group">
+			<label >Марка</label>
+			<input type="text" class="form-control" name="nameProduct" required placeholder="Марка" ng-model="newProduct.name">
+			<div ng-show="myForm.nameProduct.$pristine"><span class="text-danger">Введіть марку продукту!</span></div>
+			<div ng-show="myForm.nameProduct.$error.required && myForm.nameProduct.$dirty"><span class="text-danger">Поле пусте!</span></div>
+		</div>
+		<div class="form-group">
+			<label >Модель</label>
+			<input type="text" class="form-control" name="modelProduct" required  placeholder="Модель" ng-model="newProduct.model">
+			<div ng-show="myForm.modelProduct.$pristine"><span class="text-danger">Введіть модель продукту!</span></div>
+			<div ng-show="myForm.modelProduct.$error.required && myForm.modelProduct.$dirty"><span class="text-danger">Поле пусте!</span></div>
+		</div>
+		<div class="form-group">
+			<label>Категорія</label>
+			<select class="form-control" required name="categoryProduct" ng-model="newProduct.category">
+				<option ng-repeat="item in categories">{{item.name}}</option>
+			</select>
+			<div ng-show="myForm.categoryProduct.$pristine"><span class="text-danger">Виберіть категорію для продукту!</span></div>
+		</div>
+		<div class="form-group">
+			<label>Кількість</label>
+			<input type="text" class="form-control" name="countProduct" ng-pattern="/\d+/" required placeholder="Кількість" ng-model="newProduct.count">
+			<div ng-show="myForm.countProduct.$pristine"><span class="text-danger">Введіть к-сть!</span></div>
+			<div ng-show="myForm.countProduct.$error.required && myForm.countProduct.$dirty"><span class="text-danger">Поле пусте!</span></div>
+			<div ng-show="myForm.countProduct.$error.pattern && myForm.countProduct.$dirty"><span class="text-danger">Тільки цифри!</span></div>
+		</div>
+		<div class="form-group">
+			<label>Ціна</label>
+			<input type="text" class="form-control" name="priceProduct" ng-pattern="/^\d{3,5}$/" required  placeholder="Ціна" ng-model="newProduct.price">
+			<div ng-show="myForm.priceProduct.$pristine"><span class="text-danger">Введіть ціну!</span></div>
+			<div ng-show="myForm.priceProduct.$error.required && myForm.priceProduct.$dirty"><span class="text-danger">Поле пусте!</span></div>
+			<div ng-show="myForm.priceProduct.$error.pattern && myForm.priceProduct.$dirty"><span class="text-danger">Введіть від 3-х до 5-ти цифр!</span></div>
+		</div>
+
+	</form>
+	<div class="form-group">
+		<label>Шлях до фото</label>
+		<input type="text" class="form-control"  placeholder="Шлях до фото" ng-model="newProduct.path">
+		<form method="post" enctype="multipart/form-data" action="/uploadFile" target="result">
+			<input type="file" name="upl"></input>
+			<input class="btn btn btn-success" type="submit" value="Завантажити файл"/>
+		</form>
+	</div>
+	<iframe name="result" class="adminframe" current-item ng-hide="true"></iframe>
+	<div ng-show="myForm.$valid"><span class="text-success"><b>Форма заповнена!</b></span></div>
+	<button type="submit" class="btn btn-success" ng-disabled="myForm.$invalid" ng-click="saveProduct(newProduct)">{{button.name}}</button>
+</div>

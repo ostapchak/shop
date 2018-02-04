@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="mainApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Shop</title>
+	<link rel="stylesheet" href="../css/bootstrap.css">
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/font-awesome.css">
+	<script src="angular.min.js"></script>
+	<script src="../modules/orders.js"></script>
+	<script src="../modules/category.js"></script>
+	<script src="../modules/cart.js"></script>
+	<script src="../modules/products.js"></script>
+	<script src="../modules/pagination.js"></script>
+	<script src="../modules/personalUser.js"></script>
+	<script src="../modules/main.js"></script>
+</head>
+<body ng-controller="mainCtrl" ng-init="showAdminProducts()">
+	<div class="container" ng-controller="productsCtrl" >
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<div class="row" >
+					<div class="col-xs-12 col-sm-10">{{current.heading}}</div>
+					<div class="col-xs-12 col-sm-2"><a href="/logoutAdmin" class="btn btn-danger">Вийти</a></div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="col-xs-12 col-sm-2">
+					<ul class="nav nav-pills nav-stacked">
+						<li role="presentation" ng-class="{active:current.view=='views_admin/admin_orders.html'}"><a href="#" ng-click="showAdminOrders()">Замовлення</a></li>
+						<li role="presentation" ng-class="{active:current.view=='views_admin/admin_products.html'}"><a href="#" ng-click="showAdminProducts()">Товари</a></li>
+						<li role="presentation" ng-class="{active:current.view=='views_admin/admin_category.html'}"><a href="#" ng-click="showAdminCategory()">Категорії</a></li>
+						<li role="presentation" ng-class="{active:current.view=='views_admin/add_products.html'}"><a href="#" ng-click="addOrUpdate()">Додати товар</a></li>
+					</ul>
+				</div>
+				<div class="col-xs-12 col-sm-8" ng-include="current.view" ng-controller="categoryCtrl" ></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

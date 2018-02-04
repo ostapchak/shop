@@ -1,0 +1,77 @@
+<button ng-click="showProducts()" class="btn btn-warning"><i class="fa  fa-reply fa-lg"> Товари</i></button>
+
+<table class="table ">
+	<tr>
+		<th>Назва товару</th>
+		<th>Кількість</th>
+		<th>Ціна</th>
+		<th>Видалити</th>
+	</tr>
+	<tr ng-repeat="item in cart">
+		<td>{{item.name}} {{item.model}}</td>
+		<td><button ng-click="plusCount(item)" class="btn btn-primary">+</button> {{item.newcount}} <button ng-click="minusCount(item)" class="btn btn-primary">-</button></td>
+		<td>{{item.newprice}} грн</td>
+		<td><button class="btn btn-danger" ng-click="deleteProduct(item)">Видалити</button></td>
+	</tr>
+</table>
+<div class="panel panel-info">
+	<div class="panel-heading">
+		<h4>Загальна вартість: {{sumTotal()}} грн</h4>
+	</div>
+</div>
+
+
+<div class="panel panel-warning">
+	<div class="panel-heading"><h4>Оформлення</h4></div>
+	<div class="panel-body">
+		<form name="orderForm" novalidate>
+			<div class="form-group">
+				<label>Прізвище і ім'я*</label>
+				<input type="text" class="form-control" name="nameOrder" required placeholder="Прізвище та ім'я" ng-model="newOrder.names">
+				<div ng-show="orderForm.nameOrder.$pristine"><span class="text-danger">Введіть прізвище та ім'я!</span></div>
+				<div ng-show="orderForm.nameOrder.$error.required && orderForm.nameOrder.$dirty"><span class="text-danger">Поле пусте!</span></div>
+			</div>
+			<div class="form-group">
+				<label>Місто*</label>
+				<input type="text" class="form-control" name="cityOrder" required placeholder="Місто" ng-model="newOrder.city">
+				<div ng-show="orderForm.cityOrder.$pristine"><span class="text-danger">Введіть місто!</span></div>
+				<div ng-show="orderForm.cityOrder.$error.required && orderForm.cityOrder.$dirty"><span class="text-danger">Поле пусте!</span></div>
+			</div>
+			<div class="form-group">
+				<label>Електронна адреса*</label>
+				<input type="email" class="form-control" name="emailOrder" required placeholder="Електронна адреса" ng-model="newOrder.email">
+				<div ng-show="orderForm.emailOrder.$pristine"><span class="text-danger">Введіть електронну адресу!</span></div>
+				<div ng-show="orderForm.emailOrder.$error.required && orderForm.emailOrder.$dirty"><span class="text-danger">Поле пусте!</span></div>
+			</div>
+			<div class="form-group">
+				<label>Телефон*</label>
+				<input type="text" class="form-control" name="phoneOrder" ng-pattern="/\d{12}/" required placeholder="Телефон" ng-model="newOrder.phone">
+				<div ng-show="orderForm.phoneOrder.$pristine"><span class="text-danger">Введіть номер телефону!</span></div>
+				<div ng-show="orderForm.phoneOrder.$error.required && orderForm.phoneOrder.$dirty"><span class="text-danger">Поле пусте!</span></div>
+				<div ng-show="orderForm.phoneOrder.$error.pattern && orderForm.phoneOrder.$dirty"><span class="text-danger">Поле повинно містити 12 цифр! Приклад: 380987654321</span></div>
+			</div>
+			<div class="form-group">
+				<label>Перевізник*</label>
+				<select class="form-control" name="carrierOrder" required ng-model="newOrder.carrier">
+					<option>Нова пошта</option>
+					<option>Інтайм</option>
+					<option>Делівері</option>
+				</select>
+				<div ng-show="orderForm.carrierOrder.$pristine"><span class="text-danger"> Виберіть перевізника!</span></div>
+			</div>
+			<div class="form-group">
+				<label>Номер складу*</label>
+				<input type="text" class="form-control" name="adressOrder" required placeholder="Номер складу" ng-model="newOrder.adress">
+				<div ng-show="orderForm.adressOrder.$pristine"><span class="text-danger">Введіть номер складу!</span></div>
+			</div>
+			<div class="form-group">
+				<label>Коментар</label>
+				<textarea class="form-control" rows="3" ng-model="newOrder.comment"></textarea>
+			</div>
+			<button type="submit" class="btn btn-success" ng-disabled="orderForm.$invalid" ng-click="addNewOrder(newOrder,cart)">Оформити замовлення</button>
+		</form>
+	</div>
+</div>
+
+
+

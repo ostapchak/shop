@@ -1,0 +1,27 @@
+
+#loginLink{
+	color:white;
+	cursor: pointer;
+}
+#loginForm label, #regForm label{
+	color:black;
+}
+#userInfo span{
+	color:black;
+}
+.mythumbnail{
+	width: 325px;
+	height: 350px;
+}
+.mythumbnailImg{
+	width: 150px;
+	height: 150px;
+}
+.mycontainer option{
+	color: black;
+}
+
+form .ng-dirty{
+	background-color:#D6FEE1;
+};
+

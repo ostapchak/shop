@@ -1,0 +1,34 @@
+
+<div class="row" ng-controller="paginationCtrl">
+	<div class="col-xs-12 col-sm-12">
+		<table class="table  table-bordered table-striped">
+			<tr>
+				<th>Марка</th>
+				<th>Модель</th>
+				<th>Категорія</th>
+				<th>К-сть</th>
+				<th>Ціна</th>
+			</tr>
+			<tr ng-repeat="item in items">
+				<td>{{item.name}} </td>
+				<td>{{item.model}}</td>
+				<td>{{item.category}}</td>
+				<td>{{item.count}}</td>
+				<td>{{item.price}} грн</td>
+				<td><button class="btn btn-info" ng-click="addOrUpdate(item)">Редагувати</button></td>
+				<td><button class="btn btn-danger" ng-click="delProduct(item)">Видалити</button></td>
+			</tr>
+		</table>
+	</div>
+	<div class="row text-center">
+		<ul class="pagination pagination-sm" ng-if="objPage.pages.length>1">
+			<li><a href="#" ng-click="setPage(1)">First</a></li>
+			<li ><a href="#" class="btn" ng-class="{disabled:objPage.currentPage==1}" ng-click="setPage(objPage.currentPage-1)">Previous</a></li>
+			<li ng-repeat="page in objPage.pages" ng-class="{active:objPage.currentPage==page}">
+				<a href="#" ng-click="setPage(page)">{{page}}</a>
+			</li>
+			<li><a href="#" class="btn" ng-class="{disabled:objPage.currentPage==objPage.totalPage}" ng-click="setPage(objPage.currentPage+1)">Next</a></li>
+			<li><a href="#" ng-click="setPage(objPage.totalPage)">Last</a></li>
+		</ul>
+	</div>
+</div>

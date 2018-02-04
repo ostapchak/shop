@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="mainApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Shop</title>
+	
+	<link rel="stylesheet" href="../css/bootstrap.css">
+	<link rel="stylesheet" href="../css/font-awesome.css">
+	<link rel="stylesheet" href="../css/style.css">
+	<script src="angular.min.js"></script>
+	<script src="jquery.min.js"></script>
+	<script src="bootstrap.min.js"></script>
+	<script src="../modules/orders.js"></script>
+	<script src="../modules/category.js"></script>
+	<script src="../modules/products.js"></script>
+	<script src="../modules/cart.js"></script>
+	<script src="../modules/pagination.js"></script>
+	<script src="../modules/personalUser.js"></script>
+	<script src="../modules/main.js"></script>
+</head>
+<body ng-controller="mainCtrl">
+	<div class="container mycontainer" ng-controller="productsCtrl">
+		<div class="panel panel-primary" ng-controller="cartCtrl">
+			<div class="panel-heading">
+				<div ng-controller="categoryCtrl">
+					
+					<div class="row" ng-controller="personalUserCtrl">
+						<div class="col-xs-12 col-sm-10">{{current.heading}} 
+							<!-- Посилання на модальне вікно-->  
+							<div><select ng-model="selectCategory" ng-change="loadProducts({category:selectCategory})" >
+								<option ng-repeat="item in categories">{{item.name}}</option>
+							</select></div>
+							
+						</div>
+						<div class="col-xs-12 col-sm-2">
+							<div class="">
+								<span>Вітаємо, <a data-toggle="modal" data-target="#myModal" id="loginLink"><i class="fa fa-user-o" aria-hidden="true"></i> {{cabinet.linkName}}</a></span>
+								
+								<div ng-include="modal.view"></div>
+							</div>
+							<button class="btn btn-info" ng-click="showCart()" ng-show="cart.length>0">
+								<i class="fa fa-shopping-cart fa-lg"> Корзина <span class="badge" ng-show="cart.length>0">{{cart.length}}</span></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body" ng-include="current.view"></div>
+			
+		</div>
+	</div>
+</body>
+</html>
+
+

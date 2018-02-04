@@ -1,0 +1,19 @@
+<div class="row" ng-init="loadCategories()" >
+	<div class="col-xs-12 col-sm-8">
+		<form novalidate name="myForm">
+			<div class="input-group  col-xs-12 col-sm-12" >
+				<input type="text" class="form-control" required ng-model="newCategory.name">
+				<span class="input-group-btn">
+					<button class="btn btn-success" ng-disabled="myForm.$invalid" ng-click="saveCategory(newCategory)">{{button.category}}</button>
+				</span>
+			</div>
+		</form>
+		<table class="table  table-striped">
+			<tr ng-repeat="item in categories">
+				<td class="">{{item.name}}</td>
+				<td><button class="btn btn-info" ng-click="pressUpdate(item)""><i class="fa fa-pencil-square-o fa-lg" ></i></button></td>
+				<td><button class="btn btn-danger" ng-click="delCategory(item)"><i class="fa fa-times fa-lg" ></i></button></td>
+			</tr>
+		</table>
+	</div>
+</div>

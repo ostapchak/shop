@@ -1,0 +1,72 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" >
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<ul class="nav nav-pills" ng-show="visible">
+					<li role="presentation" ng-class="{active:LogRegForm==true}"><a href="#" ng-click="loadLoginForm()">Вхід</a></li>
+					<li role="presentation" ng-class="{active:LogRegForm==false}"><a href="#"  ng-click="loadRegForm()">Реєстрація</a></li>
+				</ul>
+			</div>
+			<div class="modal-body">
+				<!-- LOGIN FORM -->
+				<div ng-show="LogRegForm">
+					<div  class="container" ng-show="visible">
+						<form id="loginForm" method="post" action="/loginUser" class="col-sm-3">
+							<div class="form-group">
+								<label>Електронна адреса</label>
+								<input type="text" class="form-control" name="username">
+							</div>
+							<div class="form-group">
+								<label>Пароль</label>
+								<input type="password" class="form-control" name="password">
+							</div>
+							<button type="submit" class="btn btn-success">Увійти</button>
+							<a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a> 
+						</form>
+					</div>
+					<div class="container" id="userInfo" ng-hide="visible">
+						<div>
+							<div><img src="{{user.photo}}" alt="User Photo"></div>
+							<div><a href="/logoutUser" class="btn btn-danger btn">Вийти</a></div>
+						</div>
+						<div><span><b>Ім'я: </b>{{user.username}}</span></div>
+						<div><span><b>Email: </b>{{user.email}}</span></div>
+					</div>
+				</div>
+				<!-- REGISTRATION FORM -->
+				<div ng-hide="LogRegForm" >
+					<form id=regForm name="regForm" novalidate	method="post" action="/regUser" >
+						<div class="form-group">
+							<label>Прізвище та ім'я</label>
+							<input type="text" class="form-control" required name="username" ng-model="Reg.name">
+							<div ng-show="regForm.username.$pristine"><span class="text-danger">Введіть прізвище та ім'я!</span></div>
+							<div ng-show="regForm.username.$error.required && regForm.username.$dirty"><span class="text-danger">Поле пусте!</span></div>
+						</div>
+						<div class="form-group">
+							<label>Електронна адреса</label>
+							<input type="email" class="form-control" required name="email" ng-model="Reg.email">
+							<div ng-show="regForm.email.$pristine"><span class="text-danger">Введіть електронну адресу!</span></div>
+							<div ng-show="regForm.email.$error.required && regForm.email.$dirty"><span class="text-danger">Поле пусте!</span></div>
+						</div>
+						<div class="form-group">
+							<label>Пароль</label>
+							<input type="password" class="form-control" required name="password" ng-model="Reg.password">
+							<div ng-show="regForm.password.$pristine"><span class="text-danger">Введіть пароль!</span></div>
+							<div ng-show="regForm.password.$error.required && regForm.password.$dirty"><span class="text-danger">Поле пусте!</span></div>
+						</div>
+						<div class="form-group">
+							<label>Повторіть пароль</label>
+							<input type="password" match-password="password" class="form-control" required name="confirmPassword" ng-model="Reg.confirmPassword" compare-to="Reg.password">
+							<div ng-show="regForm.confirmPassword.$invalid"><span class="text-danger">Не співпадає!</span></div>
+						</div>
+						<button type="submit" class="btn btn-success" ng-disabled="regForm.$invalid">Зареєструватися</button>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+			</div>
+		</div>
+	</div>
+</div>

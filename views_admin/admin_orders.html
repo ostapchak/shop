@@ -1,0 +1,42 @@
+<div class="row" ng-controller="ordersCtrl">
+	<div ng-repeat="item in orders">
+		<div class="panel panel-success">
+			<div class="panel panel-heading"></div>
+			<div class="panel-body">
+				<table class="table  table-bordered" >
+					<tr class="success">
+						<th>ПІБ</th>
+						<th>Місто</th>
+						<th>Телефон</th>
+						<th>Перевізник</th>
+						<th>Коментар</th>
+					</tr>
+					<tr class="active">
+						<td>{{item.order.names}}</td>
+						<td>{{item.order.city}}</td>
+						<td>{{item.order.phone}}</td>
+						<td>{{item.order.carrier}}, {{item.order.adress}}</td>
+						<td>{{item.order.comment}}</td>
+					</tr>
+					<tr class="success">
+						<th>Марка</th>
+						<th>Модель</th>
+						<th>К-сть</th>
+						<th>Ціна</th>
+						<th>Всього</th>
+					</tr>
+					<tr ng-repeat="product in item.cart" class="active">
+						<td>{{$index+1}}. {{product.name}}</td>
+						<td>{{product.model}}</td>
+						<td>{{product.newcount}}</td>
+						<td>{{product.price}} грн</td>
+						<td>{{product.newprice}} грн</td>
+					</tr>
+				</table>
+			</div>
+			<div class="panel-footer">
+				<button class="btn btn-success" ng-click="successOrder(item,$event)">Закрити замовлення</button>
+			</div>
+		</div>
+	</div>
+</div>
